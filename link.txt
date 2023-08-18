@@ -1,0 +1,3 @@
+Bot Invite Link: https://discord.com/api/oauth2/authorize?client_id=1135679028775362721&permissions=8&scope=bot
+Can change if permission changes
+Permission: Admin
