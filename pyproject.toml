@@ -6,11 +6,9 @@ authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<3.11"
-numpy = "^1.22.2"
 Flask = "^2.2.0"
 discord = "^2.3.2"
 python-dotenv = "^1.0.0"
-youtube_dl = "^2021.12.17"
 webserver = "^0.10.3"
 
 [tool.poetry.dev-dependencies]
