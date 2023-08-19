@@ -8,7 +8,7 @@ app = Flask('')
 @app.route('/')
 def home():
 
-  return "I'm alive (just a flask frontend)"
+  return "I'm alive (just a placeholder)"
 
 
 def run():
