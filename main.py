@@ -1,7 +1,7 @@
 import discord
 from discord import app_commands  #idk if needed
 from discord.ext import commands  #same here
-from dotenv import load_dotenv
+from dotenv import load_dotenv #
 import os
 from webserver import keep_alive
 from commands import setup_commands
