@@ -43,4 +43,3 @@ def setup_commands(bot: commands.Bot):
         else:
             await interaction.response.send_message("No bot messages to clear. (Ephemeral messages will not be removed)",
                                                     ephemeral=True)
-
