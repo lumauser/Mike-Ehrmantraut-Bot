@@ -9,7 +9,7 @@ def setup_commands(bot: commands.Bot):
     async def hello(interaction: discord.Interaction):
         await interaction.response.send_message(
             f"Hey {interaction.user.mention}!",
-            ephemeral=True)
+            ephemeral=False)
 
     @bot.tree.command(name="say", description="Tell me something to say")
     @app_commands.describe(arg="What should I say?")
@@ -31,7 +31,7 @@ def setup_commands(bot: commands.Bot):
         bot_messages = []
 
         async for message in interaction.channel.history(limit=None):
-            if message.author == bot.user:
+            if message.author == bot.user and len(bot_messages) < 15:
                 bot_messages.append(message)
 
         if bot_messages:
@@ -43,3 +43,8 @@ def setup_commands(bot: commands.Bot):
         else:
             await interaction.response.send_message("No bot messages to clear. (Ephemeral messages will not be removed)",
                                                     ephemeral=True)
+    @bot.tree.command(name="f", description="F to pay respects 🫡")
+    async def f(interaction: discord.Interaction):
+      user_mention = f"<@{interaction.user.id}>"
+      embed = discord.Embed(description=f"{user_mention} has paid their respects 🫡\n :regional_indicator_f: Use /f to pay respects")
+      await interaction.response.send_message(embed=embed)
