@@ -102,16 +102,3 @@ def setup_commands(bot: commands.Bot):
           await interaction.response.send_message(embed=embed)
       else:
           await interaction.response.send_message("Unable to fetch weather information for that city.", ephemeral=True)
-
-    @bot.tree.command(name="joinvc", description="Just joins your vc. Nothing else.")
-    async def joinvc(interaction: discord.Interaction):
-      user = interaction.user
-      
-      if user.voice and user.voice.channel:
-        voice_channel = user.voice.channel
-
-        voice_client = await voice_channel.connect()
-
-        await interaction.response.send_message(f"Joined {voice_channel.name}.")
-      else:
-          await interaction.response.send_message("You need to be in a voice channel to use this command.")
