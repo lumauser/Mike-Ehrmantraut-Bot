@@ -101,4 +101,44 @@ def setup_commands(bot: commands.Bot):
 
           await interaction.response.send_message(embed=embed)
       else:
-          await interaction.response.send_message("Unable to fetch weather information for that city.", ephemeral=True)
+          await interaction.response.send_message("Unable to fetch weather information for that city.", ephemeral=True) 
+    @bot.tree.command(name="channel", description="Set counting channel")
+    async def set_channel(interaction: discord.Interaction):
+        channel_name = interaction.channel.name
+        await interaction.response.send_message(
+            f"# Set the channel to {interaction.channel.mention}",
+            ephemeral=False)
+        count_message(bot, channel_name)
+      
+count_number = 1
+last_user = ""
+
+
+def is_integer(n):
+    try:
+        int(n)
+        return True
+    except ValueError:
+        return False
+
+def count_message(bot, channel_name):
+
+    @bot.event
+    async def on_message(message):
+        if message.channel.name == channel_name and message.author != bot.user:
+            if is_integer(message.content):
+
+                global count_number
+                global last_user
+                
+                if int(message.content) == count_number and message.author != last_user:
+                    count_number += 1
+                    last_user = message.author
+                    await message.add_reaction("✅")
+                else:
+                    count_number = 1
+                    last_user = ""
+                    await message.add_reaction("❌")
+                    await interaction.response.send_message(f"{message.author.mention} got it wrong!",
+            ephemeral=False)
+    
