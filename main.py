@@ -20,8 +20,11 @@ async def on_ready():
         print(f"Synced {len(synced)} command(s)")
     except Exception as e:
         print(e)
-
-setup_commands(bot)  # Set up commands using the function from commands.py
+    
+    num_servers = len(bot.guilds)
+    print(f"This bot is in {num_servers} servers!")
+  
+setup_commands(bot)
 
 keep_alive()
 bot.run(BOT_TOKEN)
