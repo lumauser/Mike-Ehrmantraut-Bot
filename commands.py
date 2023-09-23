@@ -102,3 +102,18 @@ def setup_commands(bot: commands.Bot):
           await interaction.response.send_message(embed=embed)
       else:
           await interaction.response.send_message("Unable to fetch weather information for that city.", ephemeral=True) 
+
+    @bot.tree.command(name="poll", description="Create a poll")
+    @app_commands.describe(question="Enter the poll question")
+    async def poll(interaction: discord.Interaction, question: str):
+        await interaction.response.send_message("Creating a poll...", ephemeral=True)
+
+        poll_message = await interaction.followup.send(f"### :bar_chart: {question}")
+
+        thumbs_up = '👍'
+        thumbs_down = '👎'
+        await poll_message.add_reaction(thumbs_up)
+        await poll_message.add_reaction(thumbs_down) 
+        
+        await interaction.response.delete()
+        #Work on making bot reply to command usage
