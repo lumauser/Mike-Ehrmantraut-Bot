@@ -108,7 +108,7 @@ def setup_commands(bot: commands.Bot):
     async def poll(interaction: discord.Interaction, question: str):
         await interaction.response.send_message("Creating a poll...", ephemeral=True)
 
-        poll_message = await interaction.followup.send(f"### :bar_chart: {question}")
+        poll_message = await interaction.followup.send(f"### @everyone :bar_chart: {question}")
 
         thumbs_up = '👍'
         thumbs_down = '👎'
@@ -116,4 +116,3 @@ def setup_commands(bot: commands.Bot):
         await poll_message.add_reaction(thumbs_down) 
         
         await interaction.response.delete()
-        #Work on making bot reply to command usage
