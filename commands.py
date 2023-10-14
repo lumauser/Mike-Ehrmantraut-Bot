@@ -11,6 +11,13 @@ def setup_commands(bot: commands.Bot):
         await interaction.response.send_message(
             f"Hey {interaction.user.mention}!",
             ephemeral=False)
+
+    @bot.tree.command(name="say", description="Tell me something to say")
+    @app_commands.describe(say="What should I say?")
+    async def say(interaction: discord.Interaction, say: str):
+        user_mention = f"<@{interaction.user.id}>"
+        await interaction.response.send_message(
+            f"{user_mention} said: '{say}'")
       
     @bot.tree.command(name="coinflip", description="Flip a coin")
     async def coinflip(interaction: discord.Interaction):
