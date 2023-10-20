@@ -14,7 +14,7 @@ bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Game(name="!help"))
+    await bot.change_presence(activity=discord.Game(name="Helpin My Town"))
     print("Bot is up and ready!")
     try:
         synced = await bot.tree.sync()
