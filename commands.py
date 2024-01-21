@@ -111,3 +111,9 @@ def setup_commands(bot: commands.Bot):
         await poll_message.add_reaction(idk)
         
         await interaction.response.delete()
+
+    @bot.tree.command(name="ping", description="Check the bot's ping")
+    async def ping(interaction: discord.Interaction):
+        latency = bot.latency * 1000
+        formatted_latency = "{:.2f}".format(latency)
+        await interaction.response.send_message(f"Pong! :ping_pong: Bot's ping is {formatted_latency}ms", ephemeral=False)
