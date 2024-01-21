@@ -116,4 +116,11 @@ def setup_commands(bot: commands.Bot):
     async def ping(interaction: discord.Interaction):
         latency = bot.latency * 1000
         formatted_latency = "{:.2f}".format(latency)
-        await interaction.response.send_message(f"Pong! :ping_pong: Bot's ping is {formatted_latency}ms", ephemeral=False)
+
+        embed = discord.Embed(
+            title="Pong! :ping_pong:",
+            description=f"Bot's ping is {formatted_latency}ms",
+            color=discord.Color.green()
+        )
+
+        await interaction.response.send_message(embed=embed, ephemeral=False)
