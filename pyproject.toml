@@ -11,6 +11,7 @@ discord = "^2.3.2"
 python-dotenv = "^1.0.0"
 webserver = "^0.10.3"
 requests = "^2.31.0"
+discord-py = "^2.3.2"
 
 [tool.poetry.dev-dependencies]
 debugpy = "^1.6.2"
