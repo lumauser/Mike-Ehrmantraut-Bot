@@ -109,8 +109,6 @@ def setup_commands(bot: commands.Bot):
         await poll_message.add_reaction(thumbs_up)
         await poll_message.add_reaction(thumbs_down) 
         await poll_message.add_reaction(idk)
-        
-        await interaction.response.delete()
 
     @bot.tree.command(name="ping", description="Check the bot's ping")
     async def ping(interaction: discord.Interaction):
