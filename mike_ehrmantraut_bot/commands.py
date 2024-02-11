@@ -118,7 +118,7 @@ def setup_commands(bot: commands.Bot):
         await interaction.response.send_message("Creating a poll...", ephemeral=True)
 
         poll_message = await interaction.followup.send(
-            f"### @everyone :bar_chart: {question}" #Fix @everyone that works.
+            f"### @everyone :bar_chart: {question} | Created by {interaction.user.mention}" #Fix @everyone that works.
         )
 
         thumbs_up = "👍"
