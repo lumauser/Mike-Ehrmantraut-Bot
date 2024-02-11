@@ -11,6 +11,7 @@ BOT_TOKEN = os.getenv("TOKEN")
 
 bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 
+
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Game(name="Helpin My Town"))
@@ -20,10 +21,11 @@ async def on_ready():
         print(f"Synced {len(synced)} command(s)")
     except Exception as e:
         print(e)
-    
+
     num_servers = len(bot.guilds)
     print(f"This bot is in {num_servers} servers!")
-  
+
+
 setup_commands(bot)
 
 bot.run(BOT_TOKEN)

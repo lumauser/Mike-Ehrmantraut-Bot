@@ -8,6 +8,9 @@ from discord.ext import commands
 from discord import app_commands
 import discord
 
+import string
+import asyncio
+
 
 def setup_commands(bot: commands.Bot):
     @bot.tree.command(name="hello", description="Says `Hello`")
@@ -127,15 +130,30 @@ def setup_commands(bot: commands.Bot):
 
         await interaction.response.delete()
 
-    @bot.tree.command(name="ping", description="Check the bot's ping")
-    async def ping(interaction: discord.Interaction):
-        latency = bot.latency * 1000
-        formatted_latency = "{:.2f}".format(latency)
+    @bot.tree.command(name="hex_game", description="Convert hex to ascii")
+    async def hex_game(interaction: discord.Interaction):
+        ascii_string = "".join(random.choice(string.ascii_lowercase) for _ in range(4))
+        hex_string = ""
 
-        embed = discord.Embed(
-            title="Pong! :ping_pong:",
-            description=f"Bot's ping is {formatted_latency}ms",
-            color=discord.Color.green(),
+        for l in ascii_string:
+            hex_string += l.encode("utf-8").hex() + " "
+
+        hex_string = hex_string.strip()
+
+        await interaction.response.send_message(
+            f"What is the ASCII string for the following hex value: `{hex_string}`"
         )
 
-        await interaction.response.send_message(embed=embed, ephemeral=False)
+        def check_guess(message):
+            return message.content.lower() == ascii_string
+
+        try:
+            await bot.wait_for("message", check=check_guess, timeout=30)
+        except asyncio.TimeoutError:
+            await interaction.followup.send(
+                "Time's up! You didn't guess the correct ASCII string."
+            )
+        else:
+            await interaction.followup.send(
+                f"Congratulations! You guessed the correct ASCII string: {ascii_string}"
+            )
