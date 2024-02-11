@@ -118,7 +118,7 @@ def setup_commands(bot: commands.Bot):
         await interaction.response.send_message("Creating a poll...", ephemeral=True)
 
         poll_message = await interaction.followup.send(
-            f"### @everyone :bar_chart: {question}"
+            f"### @everyone :bar_chart: {question}" #Fix @everyone that works.
         )
 
         thumbs_up = "👍"
@@ -127,8 +127,18 @@ def setup_commands(bot: commands.Bot):
         await poll_message.add_reaction(thumbs_up)
         await poll_message.add_reaction(thumbs_down)
         await poll_message.add_reaction(idk)
+    
+    @bot.tree.command(name="ping", description="Check the bot's ping")
+    async def ping(interaction: discord.Interaction):
+        latency = bot.latency * 1000
+        formatted_latency = "{:.2f}".format(latency)
 
-        await interaction.response.delete()
+        embed = discord.Embed(
+            title="Pong! :ping_pong:",
+            description=f"Bot's ping is {formatted_latency}ms",
+            color=discord.Color.green(),
+        )
+        await interaction.response.send_message(embed=embed, ephemeral=False)
 
     @bot.tree.command(name="hex_game", description="Convert hex to ascii")
     async def hex_game(interaction: discord.Interaction):
