@@ -130,19 +130,6 @@ def setup_commands(bot: commands.Bot):
 
         await interaction.response.delete()
 
-    @bot.tree.command(name="ping", description="Check the bot's ping")
-    async def ping(interaction: discord.Interaction):
-        latency = bot.latency * 1000
-        formatted_latency = "{:.2f}".format(latency)
-
-        embed = discord.Embed(
-            title="Pong! :ping_pong:",
-            description=f"Bot's ping is {formatted_latency}ms",
-            color=discord.Color.green(),
-        )
-
-        await interaction.response.send_message(embed=embed, ephemeral=False)
-
     @bot.tree.command(name="hex_game", description="Convert hex to ascii")
     async def hex_game(interaction: discord.Interaction):
         ascii_string = "".join(random.choice(string.ascii_lowercase) for _ in range(4))
@@ -161,15 +148,12 @@ def setup_commands(bot: commands.Bot):
             return message.content.lower() == ascii_string
 
         try:
-            guess_message = await bot.wait_for("message", check=check_guess, timeout=30)
+            await bot.wait_for("message", check=check_guess, timeout=30)
         except asyncio.TimeoutError:
             await interaction.followup.send(
                 "Time's up! You didn't guess the correct ASCII string."
             )
         else:
-            result_message = (
+            await interaction.followup.send(
                 f"Congratulations! You guessed the correct ASCII string: {ascii_string}"
-                if guess_message
-                else f"You didn't guess the correct ASCII string. The string was: {ascii_string}"
             )
-            await interaction.followup.send(result_message)
