@@ -200,3 +200,6 @@ replit.nix
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/python,replit,visualstudiocode
+
+# Poetry
+poetry.lock
