@@ -4,7 +4,7 @@ from discord.ext import commands
 from dotenv import load_dotenv
 from webserver import keep_alive
 import os
-from commands import setup_commands
+from mike_ehrmanraut_bot import commands
 
 load_dotenv()
 
