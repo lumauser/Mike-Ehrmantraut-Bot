@@ -2,9 +2,8 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 from dotenv import load_dotenv
-from webserver import keep_alive
 import os
-from mike_ehrmanraut_bot import commands
+from mike_ehrmantraut_bot.commands import setup_commands
 
 load_dotenv()
 
@@ -27,5 +26,4 @@ async def on_ready():
   
 setup_commands(bot)
 
-keep_alive()
 bot.run(BOT_TOKEN)
